@@ -1,0 +1,4 @@
+.gitattributes export-ignore
+.gitignore export-ignore
+docs/visual_checks/ export-ignore
+docs/visual_checks/** export-ignore
