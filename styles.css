@@ -146,9 +146,9 @@
 .catalogo-eaduems-user a:focus,
 .catalogo-eaduems-button:focus,
 .catalogo-eaduems-nav a:focus,
-.catalogo-eaduems-filterform input:focus,
-.catalogo-eaduems-filterform select:focus,
-.catalogo-eaduems-filterform button:focus,
+.catalogo-eaduems-categoryfilter select:focus,
+.catalogo-eaduems-categoryfilter button:focus,
+.catalogo-eaduems-categorylist a:focus,
 .catalogo-eaduems-share:focus {
     outline: 3px solid rgba(214, 223, 42, .9);
     outline-offset: 2px;
@@ -249,8 +249,8 @@
     top: 1rem;
 }
 
-.catalogo-eaduems-sidebarintro {
-    margin-bottom: 1rem;
+.catalogo-eaduems-mobile-categories {
+    display: none;
 }
 
 .catalogo-eaduems-sidebarintro h2,
@@ -275,19 +275,27 @@
     text-transform: uppercase;
 }
 
-.catalogo-eaduems-filterform,
+.catalogo-eaduems-categoryfilter,
 .catalogo-eaduems-cards {
     display: grid;
     gap: 1rem;
 }
 
-.catalogo-eaduems-filterform label {
+.catalogo-eaduems-categoryfilter {
+    align-items: end;
+    border-bottom: 1px solid var(--catalogo-eaduems-border);
+    grid-template-columns: minmax(220px, 320px) auto;
+    justify-content: center;
+    margin-bottom: 0;
+    padding: 1rem 0;
+}
+
+.catalogo-eaduems-categoryfilter label {
     color: var(--catalogo-eaduems-green-dark);
     font-weight: 700;
 }
 
-.catalogo-eaduems-filterform input,
-.catalogo-eaduems-filterform select {
+.catalogo-eaduems-categoryfilter select {
     border: 1px solid var(--catalogo-eaduems-border);
     border-radius: 4px;
     min-height: 2.5rem;
@@ -295,17 +303,75 @@
     width: 100%;
 }
 
-.catalogo-eaduems-filterform button {
+.catalogo-eaduems-categoryfilter button {
     background: var(--catalogo-eaduems-green-dark);
     border: 0;
     border-radius: 4px;
     color: #fff;
     font-weight: 700;
+    justify-self: start;
     min-height: 2.5rem;
+    min-width: 8rem;
+    padding: .5rem 1rem;
 }
 
-.catalogo-eaduems-filterform button:hover {
+.catalogo-eaduems-categoryfilter button:hover {
     background: var(--catalogo-eaduems-green);
+}
+
+.catalogo-eaduems-categorylist {
+    list-style: none;
+    margin: .25rem 0 0;
+    padding: 0;
+}
+
+.catalogo-eaduems-categoryitem {
+    border-bottom: 1px solid var(--catalogo-eaduems-border);
+}
+
+.catalogo-eaduems-categoryitem a {
+    align-items: center;
+    color: var(--catalogo-eaduems-ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    justify-content: flex-start;
+    padding: .7rem .25rem;
+    text-decoration: none;
+}
+
+.catalogo-eaduems-categoryname {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.catalogo-eaduems-categoryitem a:hover,
+.catalogo-eaduems-categoryitem.is-active a {
+    color: var(--catalogo-eaduems-green-dark);
+    text-decoration: none;
+}
+
+.catalogo-eaduems-categoryitem.is-active a {
+    font-weight: 800;
+}
+
+.catalogo-eaduems-categorycount {
+    background: #e9ecef;
+    border-radius: .35rem;
+    color: var(--catalogo-eaduems-muted);
+    flex: 0 0 auto;
+    font-size: .76rem;
+    font-weight: 800;
+    margin-left: 0;
+    min-width: 1.7rem;
+    padding: .1rem .35rem;
+    text-align: center;
+}
+
+.catalogo-eaduems-categoryitem.is-active .catalogo-eaduems-categorycount {
+    background: var(--catalogo-eaduems-lime);
+    color: var(--catalogo-eaduems-green-dark);
 }
 
 .catalogo-eaduems-results {
@@ -627,9 +693,24 @@
     }
 
     .catalogo-eaduems-sidebar {
-        order: -1;
+        display: none;
+        order: 2;
         position: static;
         width: 100%;
+    }
+
+    .catalogo-eaduems-results {
+        order: 1;
+    }
+
+    .catalogo-eaduems-mobile-categories {
+        border-bottom: 1px solid var(--catalogo-eaduems-border);
+        display: block;
+        padding: 1rem 0;
+    }
+
+    .catalogo-eaduems-mobile-categories .catalogo-eaduems-sidebarintro h2 {
+        font-size: 1.2rem;
     }
 
     .catalogo-eaduems-details-side {
@@ -672,9 +753,14 @@
     .catalogo-eaduems-login input,
     .catalogo-eaduems-login button,
     .catalogo-eaduems-loginlink,
-    .catalogo-eaduems-filterform button {
+    .catalogo-eaduems-categoryfilter button {
         justify-content: center;
         width: 100%;
+    }
+
+    .catalogo-eaduems-categoryfilter {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
     }
 
     .catalogo-eaduems-subtitle,

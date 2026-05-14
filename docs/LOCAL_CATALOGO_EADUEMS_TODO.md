@@ -216,3 +216,21 @@ Observação: em 2026-05-14, o login rápido foi validado com sessão web real u
 Observação: em 2026-05-14, a Fase 11 foi iniciada. O upgrade CLI retornou que não havia atualização pendente para Moodle 5.1.3+, os caches foram purgados, Index e Detalhes retornaram HTTP 200 sem strings ausentes após purge, e `php -l` passou nos arquivos PHP ativos. A validação visual final gerou `docs/visual_checks/final-index-desktop.png`, `docs/visual_checks/final-index-mobile.png`, `docs/visual_checks/final-details-desktop.png` e `docs/visual_checks/final-details-mobile.png`. A revisão do repositório confirmou que ainda não há commit inicial; arquivos seguem como não rastreados. Artefatos temporários de screenshot com nomes curtos foram removidos. Commit, tag, ZIP e publicação ficam pendentes de autorização explícita.
 
 Observação final: em 2026-05-14, com autorização explícita, a release `0.1.0` foi preparada. `version.php` foi atualizado para `2026051400` e `release = 0.1.0`; o upgrade CLI com `max_input_vars=5000` concluiu com sucesso e os caches foram purgados. A entrega foi commitada, tagueada como `v0.1.0`, empacotada em ZIP limpo a partir do Git, validada e publicada no remoto.
+
+## 12. Versão 0.2.0 - ajustes pequenos da Index
+
+- [x] Reduzir os filtros da Index para um único filtro por categoria de curso.
+- [x] Remover o bloco lateral antigo de filtros combinados.
+- [x] Adicionar bloco lateral com categorias de cursos e quantidade de cursos por categoria.
+- [x] Validar visual desktop da nova Index.
+- [x] Validar visual mobile da nova Index.
+- [x] Rodar validação PHP e HTTP após os ajustes.
+- [x] Validar filtro por categoria, link lateral, paginação e estado vazio.
+
+Observação: a versão `0.2.0-dev` foi iniciada em 2026-05-14 com foco em aproximar a Index da referência Lambda, mantendo identidade visual EAD/UEMS. A busca por texto, filtros por campos personalizados e ordenação permanecem como infraestrutura interna do repositório, mas deixam de aparecer na interface pública da Index nesta etapa.
+
+Observação: em 2026-05-14, `php -l` passou nos arquivos alterados da Index, repositório, renderer e idiomas. O upgrade CLI aplicou a versão `2026051401`, os caches foram purgados, e a Index respondeu HTTP 200 para `category=0` e `category=1`, sem strings ausentes e sem o formulário antigo `catalogo-eaduems-filterform`.
+
+Observação: em 2026-05-14, a revisão visual da Index v0.2.0-dev foi feita em desktop e mobile. O seletor de categoria foi centralizado e compactado no desktop; no mobile, a lista de categorias foi exibida logo abaixo do filtro para que os contadores fiquem acessíveis antes dos cards. Capturas finais: `docs/visual_checks/v020-index-desktop-categories-final.png` e `docs/visual_checks/v020-index-mobile-categories-counts-final.png`.
+
+Observação: em 2026-05-14, a validação funcional curta da Index confirmou HTTP 200 para a listagem geral, categoria `1` e estado vazio com categoria inexistente. A listagem geral exibiu 10 cards na primeira página e paginação preservando `category=0`; a categoria `1` exibiu 5 cards e marcou o item lateral como ativo; o estado vazio exibiu a mensagem esperada. Não houve strings ausentes e o formulário antigo de filtros não apareceu no HTML.

@@ -51,16 +51,16 @@ class course_repository {
         global $DB;
 
         return $DB->get_records_sql(
-            "SELECT cc.*
+            "SELECT cc.*, counts.visiblecoursecount
                FROM {course_categories} cc
-              WHERE cc.visible = 1
-                AND EXISTS (
-                    SELECT 1
+               JOIN (
+                    SELECT c.category, COUNT(1) AS visiblecoursecount
                       FROM {course} c
-                     WHERE c.category = cc.id
-                       AND c.visible = 1
+                     WHERE c.visible = 1
                        AND c.id > 1
-                )
+                  GROUP BY c.category
+               ) counts ON counts.category = cc.id
+              WHERE cc.visible = 1
            ORDER BY cc.sortorder ASC"
         );
     }

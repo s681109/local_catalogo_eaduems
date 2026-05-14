@@ -18,6 +18,7 @@ $string['certificate'] = 'Certificado';
 $string['continuecourse'] = 'Continuar curso';
 $string['courseabout'] = 'Sobre o curso';
 $string['courseactions'] = 'Inscricao e acesso';
+$string['coursecategories'] = 'Categorias de cursos';
 $string['coursecontent'] = 'Conteudo do curso';
 $string['coursecontent_empty'] = 'O conteudo programatico sera divulgado em breve.';
 $string['courseimagefallback'] = 'Curso sem imagem: {$a}';

@@ -18,6 +18,7 @@ $string['certificate'] = 'Certificate';
 $string['continuecourse'] = 'Continue course';
 $string['courseabout'] = 'About this course';
 $string['courseactions'] = 'Enrollment and access';
+$string['coursecategories'] = 'Course categories';
 $string['coursecontent'] = 'Course content';
 $string['coursecontent_empty'] = 'The course syllabus will be available soon.';
 $string['courseimagefallback'] = 'Course without image: {$a}';

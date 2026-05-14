@@ -48,9 +48,6 @@ class renderer extends plugin_renderer_base {
         int $total,
         array $filters,
         array $categories,
-        array $nivelfilteroptions,
-        array $certificadofilteroptions,
-        array $sortoptions,
         int $page,
         int $perpage,
         moodle_url $url
@@ -60,6 +57,8 @@ class renderer extends plugin_renderer_base {
         $output = html_writer::start_div('catalogo-eaduems-layout');
         $output .= html_writer::start_tag('section', ['class' => 'catalogo-eaduems-results', 'aria-label' => get_string('catalogresults', 'local_catalogo_eaduems')]);
         $output .= $this->render_results_header($total, $filters);
+        $output .= $this->render_category_filter($filters, $categories);
+        $output .= html_writer::div($this->render_category_sidebar($filters, $categories), 'catalogo-eaduems-mobile-categories');
         if (!empty($courses)) {
             $output .= html_writer::start_div('catalogo-eaduems-cards');
             foreach ($courses as $course) {
@@ -73,7 +72,7 @@ class renderer extends plugin_renderer_base {
         $output .= html_writer::end_tag('section');
 
         $output .= html_writer::start_tag('aside', ['class' => 'catalogo-eaduems-sidebar']);
-        $output .= $this->render_filter_form($filters, $categories, $nivelfilteroptions, $certificadofilteroptions, $sortoptions);
+        $output .= $this->render_category_sidebar($filters, $categories);
         $output .= html_writer::end_tag('aside');
         $output .= html_writer::end_div();
 
@@ -180,36 +179,59 @@ class renderer extends plugin_renderer_base {
         return $output;
     }
 
-    private function render_filter_form(
-        array $filters,
-        array $categories,
-        array $nivelfilteroptions,
-        array $certificadofilteroptions,
-        array $sortoptions
-    ): string {
-        $output = html_writer::start_div('catalogo-eaduems-sidebarintro');
-        $output .= html_writer::tag('h2', s(get_string('filters', 'local_catalogo_eaduems')));
-        $output .= html_writer::tag('p', s(get_string('filters_desc', 'local_catalogo_eaduems')));
-        $output .= html_writer::end_div();
-        $output .= html_writer::start_tag('form', [
+    private function render_category_filter(array $filters, array $categories): string {
+        $output = html_writer::start_tag('form', [
             'action' => 'index.php',
             'method' => 'get',
-            'class' => 'catalogo-eaduems-filterform',
+            'class' => 'catalogo-eaduems-categoryfilter',
         ]);
-        $output .= html_writer::label(get_string('search', 'local_catalogo_eaduems'), 'catalogo-eaduems-search');
-        $output .= html_writer::empty_tag('input', [
-            'id' => 'catalogo-eaduems-search',
-            'name' => 'search',
-            'type' => 'search',
-            'value' => s($filters['search'] ?? ''),
-            'placeholder' => get_string('searchplaceholder', 'local_catalogo_eaduems'),
-        ]);
-        $output .= $this->render_select('catalogo-eaduems-category', 'category', get_string('category', 'local_catalogo_eaduems'), get_string('allcategories', 'local_catalogo_eaduems'), $this->category_options($categories), (string) ($filters['category'] ?? 0));
-        $output .= $this->render_select('catalogo-eaduems-nivel', 'nivel', get_string('level', 'local_catalogo_eaduems'), get_string('alllevels', 'local_catalogo_eaduems'), $nivelfilteroptions, (string) ($filters['nivel'] ?? 0));
-        $output .= $this->render_select('catalogo-eaduems-certificado', 'certificado', get_string('certificate', 'local_catalogo_eaduems'), get_string('allcertificates', 'local_catalogo_eaduems'), $certificadofilteroptions, (string) ($filters['certificado'] ?? 0));
-        $output .= $this->render_select('catalogo-eaduems-sort', 'sort', get_string('sortby', 'local_catalogo_eaduems'), '', $sortoptions, (string) ($filters['sort'] ?? 'name'), false);
+        $output .= html_writer::label(get_string('category', 'local_catalogo_eaduems'), 'catalogo-eaduems-category', false, ['class' => 'visually-hidden']);
+        $output .= html_writer::start_tag('select', ['id' => 'catalogo-eaduems-category', 'name' => 'category']);
+        $current = (string) ($filters['category'] ?? 0);
+        $attrs = ['value' => '0'];
+        if ($current === '0' || $current === '') {
+            $attrs['selected'] = 'selected';
+        }
+        $output .= html_writer::tag('option', get_string('allcategories', 'local_catalogo_eaduems'), $attrs);
+        foreach ($this->category_options($categories) as $value => $optionlabel) {
+            $attrs = ['value' => (string) $value];
+            if ((string) $value === $current) {
+                $attrs['selected'] = 'selected';
+            }
+            $output .= html_writer::tag('option', s($optionlabel), $attrs);
+        }
+        $output .= html_writer::end_tag('select');
         $output .= html_writer::tag('button', s(get_string('filter', 'local_catalogo_eaduems')), ['type' => 'submit']);
         $output .= html_writer::end_tag('form');
+
+        return $output;
+    }
+
+    private function render_category_sidebar(array $filters, array $categories): string {
+        $currentcategory = (int) ($filters['category'] ?? 0);
+        $output = html_writer::start_div('catalogo-eaduems-sidebarintro');
+        $output .= html_writer::tag('h2', s(get_string('coursecategories', 'local_catalogo_eaduems')));
+        $output .= html_writer::end_div();
+
+        if (empty($categories)) {
+            return $output;
+        }
+
+        $items = '';
+        foreach ($categories as $category) {
+            $coursecount = (int) ($category->visiblecoursecount ?? 0);
+            $categoryurl = new moodle_url('/local/catalogo_eaduems/public/index.php', ['category' => $category->id]);
+            $classes = 'catalogo-eaduems-categoryitem';
+            if ((int) $category->id === $currentcategory) {
+                $classes .= ' is-active';
+            }
+
+            $linkcontent = html_writer::span(s($category->name), 'catalogo-eaduems-categoryname');
+            $linkcontent .= html_writer::span((string) $coursecount, 'catalogo-eaduems-categorycount');
+            $items .= html_writer::tag('li', html_writer::link($categoryurl, $linkcontent), ['class' => $classes]);
+        }
+
+        $output .= html_writer::tag('ul', $items, ['class' => 'catalogo-eaduems-categorylist']);
 
         return $output;
     }
@@ -256,11 +278,7 @@ class renderer extends plugin_renderer_base {
 
         $output = html_writer::start_div('catalogo-eaduems-resultsheader');
         $output .= html_writer::tag('h2', s($count));
-        if (trim((string) ($filters['search'] ?? '')) !== '') {
-            $output .= html_writer::tag('p', s(get_string('searchactive', 'local_catalogo_eaduems', $filters['search'])));
-        } else {
-            $output .= html_writer::tag('p', s(get_string('catalogresults_desc', 'local_catalogo_eaduems')));
-        }
+        $output .= html_writer::tag('p', s(get_string('catalogresults_desc', 'local_catalogo_eaduems')));
         $output .= html_writer::end_div();
 
         return $output;
