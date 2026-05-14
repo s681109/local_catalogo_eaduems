@@ -5,5 +5,5 @@ $plugin->component = 'local_catalogo_eaduems';
 $plugin->version   = 2026051401;
 $plugin->requires  = 2025100600; // Moodle 5.1.
 $plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = '0.2.0-dev';
+$plugin->release   = '0.2.0';
 $plugin->dependencies = [];

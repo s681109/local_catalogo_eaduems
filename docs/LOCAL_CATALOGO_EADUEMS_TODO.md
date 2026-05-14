@@ -234,3 +234,5 @@ Observação: em 2026-05-14, `php -l` passou nos arquivos alterados da Index, re
 Observação: em 2026-05-14, a revisão visual da Index v0.2.0-dev foi feita em desktop e mobile. O seletor de categoria foi centralizado e compactado no desktop; no mobile, a lista de categorias foi exibida logo abaixo do filtro para que os contadores fiquem acessíveis antes dos cards. Capturas finais: `docs/visual_checks/v020-index-desktop-categories-final.png` e `docs/visual_checks/v020-index-mobile-categories-counts-final.png`.
 
 Observação: em 2026-05-14, a validação funcional curta da Index confirmou HTTP 200 para a listagem geral, categoria `1` e estado vazio com categoria inexistente. A listagem geral exibiu 10 cards na primeira página e paginação preservando `category=0`; a categoria `1` exibiu 5 cards e marcou o item lateral como ativo; o estado vazio exibiu a mensagem esperada. Não houve strings ausentes e o formulário antigo de filtros não apareceu no HTML.
+
+Observação final: em 2026-05-14, a Index da `0.2.0-dev` foi aprovada em navegador local e a release `0.2.0` foi iniciada para fechamento mantendo a tag `v0.1.0` preservada intacta.
