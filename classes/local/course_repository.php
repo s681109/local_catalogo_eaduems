@@ -50,19 +50,55 @@ class course_repository {
     public function get_visible_categories(): array {
         global $DB;
 
-        return $DB->get_records_sql(
-            "SELECT cc.*, counts.visiblecoursecount
+        $categories = $DB->get_records_sql(
+            "SELECT cc.id, cc.name, cc.parent, cc.path, cc.depth, cc.sortorder
                FROM {course_categories} cc
-               JOIN (
-                    SELECT c.category, COUNT(1) AS visiblecoursecount
-                      FROM {course} c
-                     WHERE c.visible = 1
-                       AND c.id > 1
-                  GROUP BY c.category
-               ) counts ON counts.category = cc.id
               WHERE cc.visible = 1
            ORDER BY cc.sortorder ASC"
         );
+
+        if (empty($categories)) {
+            return [];
+        }
+
+        $directcounts = $DB->get_records_sql_menu(
+            "SELECT c.category, COUNT(1) AS visiblecoursecount
+               FROM {course} c
+               JOIN {course_categories} cc ON cc.id = c.category
+              WHERE c.visible = 1
+                AND c.id > 1
+                AND cc.visible = 1
+           GROUP BY c.category"
+        );
+
+        foreach ($categories as $category) {
+            $category->directcoursecount = (int) ($directcounts[$category->id] ?? 0);
+            $category->visiblecoursecount = 0;
+            $category->haschildren = false;
+        }
+
+        foreach ($categories as $category) {
+            $directcount = (int) ($directcounts[$category->id] ?? 0);
+            if ($directcount <= 0) {
+                continue;
+            }
+
+            foreach ($this->category_path_ids((string) $category->path) as $ancestorid) {
+                if (isset($categories[$ancestorid])) {
+                    $categories[$ancestorid]->visiblecoursecount += $directcount;
+                }
+            }
+        }
+
+        foreach ($categories as $category) {
+            if ((int) $category->parent > 0 && isset($categories[$category->parent])) {
+                $categories[$category->parent]->haschildren = true;
+            }
+        }
+
+        return array_values(array_filter($categories, static function($category): bool {
+            return (int) $category->visiblecoursecount > 0;
+        }));
     }
 
     public function get_sort_options(): array {
@@ -80,8 +116,15 @@ class course_repository {
         $params = [];
 
         if (!empty($filters['category'])) {
-            $where .= ' AND c.category = :categoryid';
-            $params['categoryid'] = (int) $filters['category'];
+            $categoryids = $this->get_visible_category_filter_ids((int) $filters['category']);
+            if (empty($categoryids)) {
+                $where .= ' AND c.category = :categoryidmissing';
+                $params['categoryidmissing'] = -1;
+            } else {
+                [$categorysql, $categoryparams] = $DB->get_in_or_equal($categoryids, SQL_PARAMS_NAMED, 'categoryfilter');
+                $where .= " AND c.category {$categorysql}";
+                $params = array_merge($params, $categoryparams);
+            }
         }
 
         $search = trim((string) ($filters['search'] ?? ''));
@@ -106,6 +149,41 @@ class course_repository {
         }
 
         return [$where, $params];
+    }
+
+    private function get_visible_category_filter_ids(int $categoryid): array {
+        global $DB;
+
+        $category = $DB->get_record('course_categories', [
+            'id' => $categoryid,
+            'visible' => 1,
+        ], 'id, path', IGNORE_MISSING);
+
+        if (!$category) {
+            return [];
+        }
+
+        $like = $DB->sql_like('path', ':categorypath', false);
+        $records = $DB->get_records_sql(
+            "SELECT id
+               FROM {course_categories}
+              WHERE visible = 1
+                AND (id = :categoryid OR {$like})",
+            [
+                'categoryid' => $categoryid,
+                'categorypath' => $category->path . '/%',
+            ]
+        );
+
+        return array_map('intval', array_keys($records));
+    }
+
+    private function category_path_ids(string $path): array {
+        $ids = array_filter(explode('/', trim($path, '/')), static function($id): bool {
+            return $id !== '';
+        });
+
+        return array_map('intval', $ids);
     }
 
     private function get_sort_orderby(string $sort): string {

@@ -6,26 +6,161 @@ defined('MOODLE_INTERNAL') || die();
 use html_writer;
 use moodle_url;
 use plugin_renderer_base;
+use core\session\manager;
 
 class renderer extends plugin_renderer_base {
 
     public function render_shell(string $title, string $content, bool $showhero = true): string {
         $output = html_writer::start_div('local-catalogo-eaduems');
-        $output .= $this->render_topbar();
-        $output .= $this->render_navbar();
-        if ($showhero) {
-            $output .= html_writer::start_div('catalogo-eaduems-hero');
-            $output .= html_writer::start_div('catalogo-eaduems-hero-inner');
-            $output .= html_writer::tag('span', s(get_string('cataloghero_kicker', 'local_catalogo_eaduems')), ['class' => 'catalogo-eaduems-kicker']);
-            $output .= html_writer::tag('h1', s($title));
-            $output .= html_writer::tag('p', s(get_string('cataloghero_subtitle', 'local_catalogo_eaduems')), ['class' => 'catalogo-eaduems-subtitle']);
-            $output .= html_writer::end_div();
-            $output .= html_writer::end_div();
-        }
+        $output .= $this->render_portal_header($showhero);
+
         $output .= html_writer::div($content, 'catalogo-eaduems-content');
         $output .= html_writer::end_div();
 
         return $output;
+    }
+
+    private function render_portal_header(bool $showlogin = true): string {
+        $quicklogin = $showlogin ? $this->get_portal_quicklogin_context() : [];
+        $output = html_writer::start_div('eaduems-portal catalogo-eaduems-portalheader');
+        $output .= html_writer::start_tag('header', [
+            'class' => 'eaduems-portal-mainheader',
+            'aria-label' => 'Cabeçalho do portal EAD/UEMS',
+        ]);
+        $output .= html_writer::start_div('eaduems-portal-mainheader-inner');
+        $output .= html_writer::link(new moodle_url('/'),
+            html_writer::span('E', 'eaduems-portal-brandmark', ['aria-hidden' => 'true']) .
+            html_writer::span(
+                html_writer::tag('strong', 'EAD/UEMS') . html_writer::span('Portal de cursos online'),
+                'eaduems-portal-brandtext'
+            ),
+            ['class' => 'eaduems-portal-brand']
+        );
+
+        if (!empty($quicklogin)) {
+            $output .= html_writer::start_tag('form', [
+                'class' => 'eaduems-portal-headerlogin',
+                'action' => $quicklogin['loginurl'],
+                'method' => 'post',
+            ]);
+            $output .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'logintoken', 'value' => $quicklogin['logintoken']]);
+            $output .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'wantsurl', 'value' => $quicklogin['wantsurl']]);
+            $output .= html_writer::label($quicklogin['usernameplaceholder'], 'catalogo-eaduems-header-username', false, ['class' => 'visually-hidden']);
+            $output .= html_writer::span(
+                html_writer::span('&#xf007;', '', ['aria-hidden' => 'true']) .
+                html_writer::empty_tag('input', [
+                    'id' => 'catalogo-eaduems-header-username',
+                    'type' => 'text',
+                    'name' => 'username',
+                    'autocomplete' => 'username',
+                    'placeholder' => $quicklogin['usernameplaceholder'],
+                ]),
+                'eaduems-portal-loginfield'
+            );
+            $output .= html_writer::label($quicklogin['passwordplaceholder'], 'catalogo-eaduems-header-password', false, ['class' => 'visually-hidden']);
+            $output .= html_writer::span(
+                html_writer::span('&#xf023;', '', ['aria-hidden' => 'true']) .
+                html_writer::empty_tag('input', [
+                    'id' => 'catalogo-eaduems-header-password',
+                    'type' => 'password',
+                    'name' => 'password',
+                    'autocomplete' => 'current-password',
+                    'placeholder' => $quicklogin['passwordplaceholder'],
+                ]),
+                'eaduems-portal-loginfield'
+            );
+            $output .= html_writer::tag('button', '&#xf054;', [
+                'class' => 'eaduems-portal-loginbutton',
+                'type' => 'submit',
+                'aria-label' => $quicklogin['loginbutton'],
+            ]);
+            $output .= html_writer::start_div('eaduems-portal-loginlinks');
+            $output .= html_writer::link($quicklogin['forgotpasswordurl'], $quicklogin['forgotpassword'], ['class' => 'eaduems-portal-forgot']);
+            if (!empty($quicklogin['cancreateaccount'])) {
+                $output .= html_writer::link($quicklogin['signupurl'], $quicklogin['createaccount'], ['class' => 'eaduems-portal-createaccount']);
+            }
+            $output .= html_writer::end_div();
+            $output .= html_writer::end_tag('form');
+        } else if ($showlogin && isloggedin() && !isguestuser()) {
+            $output .= $this->render_portal_usernav();
+        }
+
+        $output .= html_writer::end_div();
+        $output .= html_writer::end_tag('header');
+        $output .= html_writer::start_tag('nav', [
+            'class' => 'eaduems-portal-navbar',
+            'aria-label' => 'Navegação principal do portal',
+        ]);
+        $output .= html_writer::start_div('eaduems-portal-navbar-inner');
+        $output .= html_writer::link(new moodle_url('/', ['redirect' => 0]), 'Página inicial', ['class' => 'eaduems-portal-navhome']);
+        $output .= html_writer::link(new moodle_url('/local/catalogo_eaduems/public/index.php'), 'Catálogo');
+        $output .= html_writer::start_tag('form', [
+            'class' => 'eaduems-portal-navsearch',
+            'action' => (new moodle_url('/course/search.php'))->out(false),
+            'method' => 'get',
+        ]);
+        $output .= html_writer::label('Buscar cursos', 'catalogo-eaduems-nav-search', false, ['class' => 'visually-hidden']);
+        $output .= html_writer::empty_tag('input', [
+            'id' => 'catalogo-eaduems-nav-search',
+            'type' => 'search',
+            'name' => 'q',
+            'placeholder' => 'Buscar cursos...',
+        ]);
+        $output .= html_writer::tag('button', '&#xf002;', ['type' => 'submit', 'aria-label' => 'Buscar']);
+        $output .= html_writer::end_tag('form');
+        $output .= html_writer::end_div();
+        $output .= html_writer::end_tag('nav');
+        $output .= html_writer::end_div();
+
+        return $output;
+    }
+
+    private function render_portal_usernav(): string {
+        global $OUTPUT, $PAGE;
+
+        $renderer = $PAGE->get_renderer('core');
+        $primary = new \theme_eaduems_portal\output\navigation\primary($PAGE);
+        $primarymenu = $primary->export_for_template($renderer);
+
+        $output = html_writer::start_div('eaduems-portal-usernav catalogo-eaduems-usernav');
+        $output .= $OUTPUT->navbar_plugin_output();
+        $output .= html_writer::start_div('d-flex align-items-stretch usermenu-container', ['data-region' => 'usermenu']);
+        if (!empty($primarymenu['user'])) {
+            $output .= $OUTPUT->render_from_template('core/user_menu', $primarymenu['user']);
+        }
+        $output .= html_writer::end_div();
+        $output .= $OUTPUT->edit_switch();
+        $output .= html_writer::end_div();
+
+        return $output;
+    }
+
+    private function get_portal_quicklogin_context(): array {
+        global $CFG, $PAGE, $SESSION;
+
+        if (isloggedin() && !isguestuser()) {
+            return [];
+        }
+
+        $loginurl = new moodle_url('/login/index.php');
+        $forgotpasswordurl = new moodle_url('/login/forgot_password.php');
+        $signupurl = new moodle_url('/login/signup.php');
+        $wantsurl = $PAGE->url->out(false);
+        $SESSION->wantsurl = $wantsurl;
+
+        return [
+            'loginurl' => $loginurl->out(false),
+            'forgotpasswordurl' => $forgotpasswordurl->out(false),
+            'signupurl' => $signupurl->out(false),
+            'logintoken' => manager::get_login_token(),
+            'wantsurl' => $wantsurl,
+            'cancreateaccount' => !empty($CFG->registerauth),
+            'usernameplaceholder' => 'Usuário',
+            'passwordplaceholder' => 'Senha',
+            'loginbutton' => 'Acessar',
+            'forgotpassword' => 'Esqueci minha senha',
+            'createaccount' => 'Criar conta',
+        ];
     }
 
     public function render_course_placeholder(): string {
@@ -165,7 +300,6 @@ class renderer extends plugin_renderer_base {
             $buttontext = is_enrolled(\context_course::instance($course->id), $USER)
                 ? get_string('continuecourse', 'local_catalogo_eaduems')
                 : get_string('accesscourse', 'local_catalogo_eaduems');
-            $output .= html_writer::tag('p', s(get_string('authenticatedactions_desc', 'local_catalogo_eaduems')));
             $output .= html_writer::link($courseurl, $buttontext, [
                 'class' => 'catalogo-eaduems-button catalogo-eaduems-button-primary',
             ]);
@@ -193,15 +327,25 @@ class renderer extends plugin_renderer_base {
             $attrs['selected'] = 'selected';
         }
         $output .= html_writer::tag('option', get_string('allcategories', 'local_catalogo_eaduems'), $attrs);
-        foreach ($this->category_options($categories) as $value => $optionlabel) {
-            $attrs = ['value' => (string) $value];
+        foreach ($this->category_options($categories) as $value => $option) {
+            $attrs = [
+                'value' => (string) $value,
+                'class' => $option['isparent'] ? 'catalogo-eaduems-category-parentoption' : 'catalogo-eaduems-category-childoption',
+            ];
             if ((string) $value === $current) {
                 $attrs['selected'] = 'selected';
             }
-            $output .= html_writer::tag('option', s($optionlabel), $attrs);
+            $output .= html_writer::tag('option', s($option['label']), $attrs);
         }
         $output .= html_writer::end_tag('select');
-        $output .= html_writer::tag('button', s(get_string('filter', 'local_catalogo_eaduems')), ['type' => 'submit']);
+        $filtercontent = html_writer::span('&#xf0b0;', 'catalogo-eaduems-actionicon', ['aria-hidden' => 'true']);
+        $filtercontent .= html_writer::span(s(get_string('filter', 'local_catalogo_eaduems')));
+        $output .= html_writer::tag('button', $filtercontent, ['type' => 'submit']);
+        $clearcontent = html_writer::span('&#xf00d;', 'catalogo-eaduems-actionicon', ['aria-hidden' => 'true']);
+        $clearcontent .= html_writer::span(s(get_string('clearfilter', 'local_catalogo_eaduems')));
+        $output .= html_writer::link(new moodle_url('/local/catalogo_eaduems/public/index.php'), $clearcontent, [
+            'class' => 'catalogo-eaduems-clearfilter',
+        ]);
         $output .= html_writer::end_tag('form');
 
         return $output;
@@ -221,7 +365,10 @@ class renderer extends plugin_renderer_base {
         foreach ($categories as $category) {
             $coursecount = (int) ($category->visiblecoursecount ?? 0);
             $categoryurl = new moodle_url('/local/catalogo_eaduems/public/index.php', ['category' => $category->id]);
-            $classes = 'catalogo-eaduems-categoryitem';
+            $classes = 'catalogo-eaduems-categoryitem catalogo-eaduems-categorydepth-' . $this->category_visual_depth($category);
+            if (!empty($category->haschildren)) {
+                $classes .= ' is-parent';
+            }
             if ((int) $category->id === $currentcategory) {
                 $classes .= ' is-active';
             }
@@ -265,10 +412,20 @@ class renderer extends plugin_renderer_base {
     private function category_options(array $categories): array {
         $options = [];
         foreach ($categories as $category) {
-            $options[$category->id] = $category->name;
+            $depth = $this->category_visual_depth($category);
+            $prefix = $depth > 0 ? str_repeat('-- ', $depth) : '';
+            $options[$category->id] = [
+                'label' => $prefix . $category->name,
+                'isparent' => !empty($category->haschildren),
+                'depth' => $depth,
+            ];
         }
 
         return $options;
+    }
+
+    private function category_visual_depth(\stdClass $category): int {
+        return max(0, (int) ($category->depth ?? 1) - 1);
     }
 
     private function render_results_header(int $total, array $filters): string {
@@ -317,7 +474,7 @@ class renderer extends plugin_renderer_base {
     private function render_metadata(array $metadata): string {
         $rows = [
             'duracao' => get_string('duration', 'local_catalogo_eaduems'),
-            'nivel' => get_string('level', 'local_catalogo_eaduems'),
+            'nível' => get_string('level', 'local_catalogo_eaduems'),
             'publico' => get_string('publictarget', 'local_catalogo_eaduems'),
             'certificado' => get_string('certificate', 'local_catalogo_eaduems'),
             'professor_tutor' => get_string('teacher', 'local_catalogo_eaduems'),
@@ -568,3 +725,4 @@ class renderer extends plugin_renderer_base {
         return $output;
     }
 }
+

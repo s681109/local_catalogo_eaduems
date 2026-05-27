@@ -25,7 +25,7 @@ $PAGE->set_url($url);
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('pluginname', 'local_catalogo_eaduems'));
 $PAGE->set_heading(get_string('pluginname', 'local_catalogo_eaduems'));
-$PAGE->requires->css(new moodle_url('/local/catalogo_eaduems/styles.css'));
+$PAGE->requires->css(new moodle_url('/local/catalogo_eaduems/styles.css', ['v' => filemtime(__DIR__ . '/../styles.css') ?: time()]));
 
 echo $OUTPUT->header();
 

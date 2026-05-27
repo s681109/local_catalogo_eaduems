@@ -9,9 +9,12 @@
     --catalogo-eaduems-soft: #f5f8f3;
     --catalogo-eaduems-border: #d8e0dc;
     color: var(--catalogo-eaduems-ink);
-    max-width: 100%;
+    left: 50%;
+    margin-left: -50vw;
+    max-width: 100vw;
     overflow-x: hidden;
-    width: 100%;
+    position: relative;
+    width: 100vw;
 }
 
 .local-catalogo-eaduems *,
@@ -20,132 +23,57 @@
     box-sizing: border-box;
 }
 
-.path-local-catalogo_eaduems #usernavigation .usermenu-container,
-.path-local-catalogo_eaduems #usernavigation .login {
-    display: none;
+.path-local-catalogo_eaduems {
+    overflow-x: hidden;
 }
 
 .path-local-catalogo_eaduems #page-header {
     display: none;
 }
 
-.path-local-catalogo_eaduems #page-content {
+.path-local-catalogo_eaduems #page,
+.path-local-catalogo_eaduems #page-content,
+.path-local-catalogo_eaduems #region-main-box,
+.path-local-catalogo_eaduems #region-main,
+.path-local-catalogo_eaduems .main-inner {
+    margin-top: 0;
+    max-width: none;
     padding-top: 0;
+}
+
+.path-local-catalogo_eaduems #page-content,
+.path-local-catalogo_eaduems #region-main,
+.path-local-catalogo_eaduems .main-inner {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .path-local-catalogo_eaduems #region-main {
-    padding-top: 0;
+    border: 0;
+    overflow: visible;
 }
 
-.catalogo-eaduems-topbar {
-    align-items: center;
-    background: var(--catalogo-eaduems-surface);
-    border-top: 4px solid var(--catalogo-eaduems-lime);
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
-    padding: .75rem clamp(1rem, 4vw, 2rem);
-}
 
-.catalogo-eaduems-brand {
-    color: var(--catalogo-eaduems-green-dark);
-    font-size: 1.1rem;
-}
-
-.catalogo-eaduems-login {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    justify-content: flex-end;
-    min-width: 0;
-}
-
-.catalogo-eaduems-user {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    justify-content: flex-end;
-}
-
-.catalogo-eaduems-username-display {
-    color: var(--catalogo-eaduems-muted);
-    font-weight: 700;
-}
-
-.catalogo-eaduems-login input {
-    border: 1px solid var(--catalogo-eaduems-border);
-    border-radius: 4px;
-    max-width: 100%;
-    min-height: 2.25rem;
-    padding: .375rem .625rem;
-}
-
-.catalogo-eaduems-login button,
 .catalogo-eaduems-button {
+    align-items: center;
     background: var(--catalogo-eaduems-green);
     border: 1px solid var(--catalogo-eaduems-green);
     border-radius: 4px;
     color: #fff;
     display: inline-flex;
     font-weight: 700;
+    justify-content: center;
     min-height: 2.5rem;
     padding: .5rem .875rem;
     text-decoration: none;
 }
 
-.catalogo-eaduems-button {
-    align-items: center;
-    justify-content: center;
-}
-
-.catalogo-eaduems-login button:hover,
 .catalogo-eaduems-button:hover {
     background: var(--catalogo-eaduems-green-dark);
     color: #fff;
     text-decoration: none;
 }
-
-.catalogo-eaduems-login a {
-    color: var(--catalogo-eaduems-green-dark);
-    font-size: .875rem;
-}
-
-.catalogo-eaduems-loginlink {
-    align-items: center;
-    border: 1px solid var(--catalogo-eaduems-border);
-    border-radius: 4px;
-    display: inline-flex;
-    font-weight: 700;
-    min-height: 2.5rem;
-    padding: .45rem .7rem;
-    text-decoration: none;
-}
-
-.catalogo-eaduems-loginlink-muted {
-    background: #fff;
-}
-
-.catalogo-eaduems-loginlink-accent {
-    background: var(--catalogo-eaduems-lime);
-    border-color: var(--catalogo-eaduems-lime);
-    color: var(--catalogo-eaduems-green-dark);
-}
-
-.catalogo-eaduems-loginlink:hover {
-    background: var(--catalogo-eaduems-green-dark);
-    border-color: var(--catalogo-eaduems-green-dark);
-    color: #fff;
-    text-decoration: none;
-}
-
-.catalogo-eaduems-login a:focus,
-.catalogo-eaduems-login button:focus,
-.catalogo-eaduems-login input:focus,
-.catalogo-eaduems-user a:focus,
 .catalogo-eaduems-button:focus,
-.catalogo-eaduems-nav a:focus,
 .catalogo-eaduems-categoryfilter select:focus,
 .catalogo-eaduems-categoryfilter button:focus,
 .catalogo-eaduems-categorylist a:focus,
@@ -154,27 +82,6 @@
     outline-offset: 2px;
 }
 
-.catalogo-eaduems-nav {
-    align-items: center;
-    background: var(--catalogo-eaduems-green-dark);
-    display: flex;
-    gap: .25rem;
-    padding: 0 clamp(1rem, 4vw, 2rem);
-}
-
-.catalogo-eaduems-nav a {
-    color: #fff;
-    font-weight: 700;
-    padding: .85rem 1rem;
-    text-decoration: none;
-}
-
-.catalogo-eaduems-nav a:focus,
-.catalogo-eaduems-nav a:hover {
-    background: rgba(255, 255, 255, .12);
-    color: #fff;
-    text-decoration: none;
-}
 
 .catalogo-eaduems-hero {
     background: var(--catalogo-eaduems-soft);
@@ -634,14 +541,13 @@
         max-width: 100vw;
         overflow-x: hidden;
     }
-
     .local-catalogo-eaduems {
-        max-width: calc(100vw - 16px);
-        width: calc(100vw - 16px);
+        left: 50%;
+        margin-left: -50vw;
+        max-width: 100vw;
+        position: relative;
+        width: 100vw;
     }
-
-    .catalogo-eaduems-topbar,
-    .catalogo-eaduems-nav,
     .catalogo-eaduems-hero,
     .catalogo-eaduems-content,
     .catalogo-eaduems-layout,
@@ -652,16 +558,6 @@
         max-width: 100%;
         width: 100%;
     }
-
-    .catalogo-eaduems-topbar,
-    .catalogo-eaduems-login,
-    .catalogo-eaduems-user {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .catalogo-eaduems-topbar,
-    .catalogo-eaduems-nav,
     .catalogo-eaduems-hero,
     .catalogo-eaduems-content {
         padding-left: 1rem;
@@ -718,15 +614,6 @@
         width: 100%;
     }
 
-    .catalogo-eaduems-nav {
-        overflow-x: auto;
-        padding: 0 1rem;
-    }
-
-    .catalogo-eaduems-nav a {
-        white-space: nowrap;
-    }
-
     .catalogo-eaduems-hero h1 {
         display: block;
         font-size: 1.45rem;
@@ -749,10 +636,6 @@
         aspect-ratio: 16 / 9;
         min-height: 0;
     }
-
-    .catalogo-eaduems-login input,
-    .catalogo-eaduems-login button,
-    .catalogo-eaduems-loginlink,
     .catalogo-eaduems-categoryfilter button {
         justify-content: center;
         width: 100%;
@@ -775,4 +658,1523 @@
     .catalogo-eaduems-sections li {
         grid-template-columns: 1fr;
     }
+}
+
+body#page-local-catalogo_eaduems-public-index nav.navbar.fixed-top {
+    display: none !important;
+}
+
+body#page-local-catalogo_eaduems-public-index,
+body#page-local-catalogo_eaduems-public-index #page-wrapper,
+body#page-local-catalogo_eaduems-public-index #page {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+
+.catalogo-eaduems-portalheader {
+    color: var(--catalogo-eaduems-ink);
+    max-width: 100vw;
+    width: 100vw;
+}
+body#page-local-catalogo_eaduems-public-index.uses-drawers,
+body#page-local-catalogo_eaduems-public-index #page-wrapper,
+body#page-local-catalogo_eaduems-public-index #page,
+body#page-local-catalogo_eaduems-public-index #topofscroll,
+body#page-local-catalogo_eaduems-public-index .main-inner,
+body#page-local-catalogo_eaduems-public-index .main-inner-wrapper,
+body#page-local-catalogo_eaduems-public-index #page-content,
+body#page-local-catalogo_eaduems-public-index #region-main-box,
+body#page-local-catalogo_eaduems-public-index #region-main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body#page-local-catalogo_eaduems-public-index #page.drawers {
+    padding-top: 0 !important;
+}
+body#page-local-catalogo_eaduems-public-detalhes nav.navbar.fixed-top {
+    display: none !important;
+}
+
+body#page-local-catalogo_eaduems-public-detalhes,
+body#page-local-catalogo_eaduems-public-detalhes.uses-drawers,
+body#page-local-catalogo_eaduems-public-detalhes #page-wrapper,
+body#page-local-catalogo_eaduems-public-detalhes #page,
+body#page-local-catalogo_eaduems-public-detalhes #topofscroll,
+body#page-local-catalogo_eaduems-public-detalhes .main-inner,
+body#page-local-catalogo_eaduems-public-detalhes .main-inner-wrapper,
+body#page-local-catalogo_eaduems-public-detalhes #page-content,
+body#page-local-catalogo_eaduems-public-detalhes #region-main-box,
+body#page-local-catalogo_eaduems-public-detalhes #region-main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body#page-local-catalogo_eaduems-public-detalhes #page.drawers {
+    padding-top: 0 !important;
+}
+/* Rectangular button standardization. */
+.local-catalogo-eaduems button,
+.local-catalogo-eaduems .btn,
+.local-catalogo-eaduems .catalogo-eaduems-button,
+.local-catalogo-eaduems .catalogo-eaduems-share,
+.local-catalogo-eaduems .catalogo-eaduems-categoryfilter select,
+.local-catalogo-eaduems .catalogo-eaduems-categoryfilter button,
+.local-catalogo-eaduems .eaduems-portal-loginbutton,
+.local-catalogo-eaduems .eaduems-portal-forgot,
+.local-catalogo-eaduems .eaduems-portal-createaccount,
+.local-catalogo-eaduems .eaduems-portal-dashboard,
+.local-catalogo-eaduems .eaduems-portal-loginfield,
+.local-catalogo-eaduems .eaduems-portal-loginfield input,
+.local-catalogo-eaduems .eaduems-portal-navhome,
+.local-catalogo-eaduems .eaduems-portal-navsearch input,
+.local-catalogo-eaduems .eaduems-portal-navsearch button {
+    border-radius: 0 !important;
+}
+/* Focused mobile fixes for catalog Index header. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index,
+    body#page-local-catalogo_eaduems-public-index #page-wrapper,
+    body#page-local-catalogo_eaduems-public-index #page,
+    body#page-local-catalogo_eaduems-public-index .local-catalogo-eaduems {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .local-catalogo-eaduems {
+        left: auto !important;
+        margin-left: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader.eaduems-portal {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner {
+        box-sizing: border-box;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginmain {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) 2.65rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfields {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfield,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfield input {
+        min-width: 0;
+        width: 100%;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginbutton {
+        align-self: stretch;
+        display: inline-flex !important;
+        grid-column: 2;
+        grid-row: 1;
+        height: auto !important;
+        min-height: 5.35rem !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginlinks {
+        box-sizing: border-box;
+        display: grid !important;
+        gap: .45rem !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-forgot,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-createaccount {
+        box-sizing: border-box;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        box-sizing: border-box;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        display: grid !important;
+        gap: .25rem !important;
+        grid-template-columns: max-content max-content minmax(0, 1fr) !important;
+        padding: 0 .5rem .5rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar a {
+        justify-content: center;
+        min-height: 2.5rem;
+        min-width: 0;
+        padding-left: .45rem;
+        padding-right: .45rem;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navhome {
+        margin-right: 0;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navhome::after {
+        bottom: 0 !important;
+        left: 0;
+        right: 0;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch {
+        display: grid !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) 2.5rem !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch input {
+        max-width: none;
+        opacity: 1;
+        padding: .35rem .6rem;
+        width: 100%;
+    }
+}
+
+
+
+/* Final mobile alignment for catalog Index header controls. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index,
+    body#page-local-catalogo_eaduems-public-index #page-wrapper,
+    body#page-local-catalogo_eaduems-public-index #page,
+    body#page-local-catalogo_eaduems-public-index #topofscroll,
+    body#page-local-catalogo_eaduems-public-index .main-inner,
+    body#page-local-catalogo_eaduems-public-index #region-main,
+    body#page-local-catalogo_eaduems-public-index .local-catalogo-eaduems {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .local-catalogo-eaduems {
+        left: auto !important;
+        margin-left: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner {
+        align-items: stretch !important;
+        display: grid !important;
+        gap: 1rem !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        padding: 1rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        justify-self: stretch !important;
+        max-width: calc(100vw - 2rem) !important;
+        width: calc(100vw - 2rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginmain {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) 2.65rem !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfields {
+        display: grid !important;
+        gap: .45rem !important;
+        min-width: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfield,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfield input {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginbutton {
+        align-self: stretch !important;
+        display: inline-flex !important;
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        height: auto !important;
+        min-height: 5.35rem !important;
+        min-width: 0 !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginlinks {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-forgot,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-createaccount {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        display: grid !important;
+        gap: .25rem !important;
+        grid-template-columns: max-content max-content minmax(0, 1fr) !important;
+        padding: 0 .5rem .5rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navhome::after {
+        bottom: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch {
+        display: grid !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) 2.5rem !important;
+        margin-left: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Direct-child mobile login layout after catalog renderer normalization. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) 2.65rem !important;
+        max-width: calc(100vw - 2rem) !important;
+        width: calc(100vw - 2rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield:nth-of-type(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield:nth-of-type(2) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginbutton {
+        align-self: stretch !important;
+        display: inline-flex !important;
+        grid-column: 2 !important;
+        grid-row: 1 / 3 !important;
+        height: auto !important;
+        min-height: 5.35rem !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginlinks {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-column: 1 / -1 !important;
+        grid-row: 3 !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Deterministic mobile header layout for catalog Index. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: block !important;
+        max-width: calc(100vw - 2rem) !important;
+        position: relative !important;
+        width: calc(100vw - 2rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield {
+        display: grid !important;
+        margin: 0 3.1rem .45rem 0 !important;
+        min-width: 0 !important;
+        width: calc(100% - 3.1rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginbutton {
+        align-items: center !important;
+        bottom: calc(2.45rem + .9rem) !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        min-height: 0 !important;
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginlinks {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        margin-top: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        display: grid !important;
+        grid-template-columns: max-content max-content minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        padding: 0 .5rem .5rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch {
+        display: grid !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) 2.5rem !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Deterministic tablet/mobile header layout for catalog Index. */
+@media (max-width: 991.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: block !important;
+        max-width: calc(100vw - 2rem) !important;
+        position: relative !important;
+        width: calc(100vw - 2rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield {
+        display: grid !important;
+        margin: 0 3.1rem .45rem 0 !important;
+        min-width: 0 !important;
+        width: calc(100% - 3.1rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginbutton {
+        align-items: center !important;
+        bottom: calc(2.45rem + .9rem) !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        min-height: 0 !important;
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginlinks {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        margin-top: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        display: grid !important;
+        grid-template-columns: max-content max-content minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        padding: 0 .5rem .5rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch {
+        display: grid !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) 2.5rem !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+
+/* Deterministic narrow-desktop/mobile header layout for catalog Index. */
+@media (max-width: 1199.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: block !important;
+        max-width: calc(100vw - 2rem) !important;
+        position: relative !important;
+        width: calc(100vw - 2rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield {
+        display: grid !important;
+        margin: 0 3.1rem .45rem 0 !important;
+        min-width: 0 !important;
+        width: calc(100% - 3.1rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginbutton {
+        align-items: center !important;
+        bottom: calc(2.45rem + .9rem) !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        min-height: 0 !important;
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginlinks {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        margin-top: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        display: grid !important;
+        grid-template-columns: max-content max-content minmax(0, 1fr) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        padding: 0 .5rem .5rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch {
+        display: grid !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) 2.5rem !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+
+
+
+
+/* Visible-width cap for catalog Index mobile header in Moodle drawers layout. */
+@media (max-width: 1199.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        max-width: 22rem !important;
+        width: 22rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        max-width: 23.5rem !important;
+        width: 23.5rem !important;
+    }
+}
+/* Keep catalog Index mobile navbar controls inside the visible width. */
+@media (max-width: 1199.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 22rem !important;
+        width: 22rem !important;
+    }
+}
+
+/* Align Home active underline on catalog Details mobile navbar. */
+@media (max-width: 1199.98px) {
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navhome::after {
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+}
+
+/* Unified mobile portal header envelope matching the native Courses page. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index .local-catalogo-eaduems,
+    body#page-local-catalogo_eaduems-public-detalhes .local-catalogo-eaduems {
+        left: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        width: 100vw !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        width: 100vw !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner {
+        align-items: stretch !important;
+        display: grid !important;
+        gap: 1rem !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 100vw !important;
+        padding: 1rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-brand,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-brand {
+        min-width: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-template-columns: minmax(0, 1fr) 2.65rem !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        position: static !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield:nth-of-type(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginfield:nth-of-type(2) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfield,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-loginfield input {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginbutton {
+        align-self: stretch !important;
+        bottom: auto !important;
+        display: inline-flex !important;
+        grid-column: 2 !important;
+        grid-row: 1 / 3 !important;
+        height: auto !important;
+        min-height: 5.35rem !important;
+        position: static !important;
+        right: auto !important;
+        top: auto !important;
+        width: 2.65rem !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin > .eaduems-portal-loginlinks {
+        display: grid !important;
+        gap: .45rem !important;
+        grid-column: 1 / -1 !important;
+        grid-row: 3 !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navbar {
+        display: block !important;
+        margin-top: 0 !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        display: grid !important;
+        gap: .25rem !important;
+        grid-template-columns: max-content max-content minmax(0, 1fr) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 100vw !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+        padding: 0 1rem .5rem !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar a,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navbar a {
+        justify-content: center !important;
+        min-height: 2.5rem !important;
+        min-width: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navhome,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navhome {
+        margin-right: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navhome::after,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navhome::after {
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navsearch {
+        display: grid !important;
+        grid-column: 1 / -1 !important;
+        grid-template-columns: minmax(0, 1fr) 2.5rem !important;
+        margin-left: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch input,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navsearch input {
+        max-width: none !important;
+        opacity: 1 !important;
+        padding: .35rem .6rem !important;
+        width: 100% !important;
+    }
+}
+
+/* Match catalog mobile header outer bleed with the native Courses page. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index .local-catalogo-eaduems,
+    body#page-local-catalogo_eaduems-public-detalhes .local-catalogo-eaduems {
+        left: 50% !important;
+        margin-left: -50vw !important;
+        margin-right: 0 !important;
+        max-width: 100vw !important;
+        position: relative !important;
+        width: 100vw !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+}
+
+/* Keep mobile navbar search input and button aligned on catalog pages. */
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch input,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navsearch input {
+        grid-column: 1 !important;
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-navsearch button,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-navsearch button {
+        display: inline-flex !important;
+        grid-column: 2 !important;
+        height: 2.2rem !important;
+        min-width: 2.5rem !important;
+        width: 2.5rem !important;
+    }
+}
+
+/* Final catalog Index cleanup: no hero, no Home underline, subtle result divider. */
+.catalogo-eaduems-portalheader .eaduems-portal-navhome::after {
+    display: none !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-content {
+    padding-top: 1.25rem;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-resultsheader {
+    border-top: 1px solid rgba(6, 70, 37, .14);
+    padding-top: 1.25rem;
+}
+
+@media (max-width: 575.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-content {
+        padding-top: 1rem;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-resultsheader {
+        padding-top: 1rem;
+    }
+}
+
+/* Global cleanup: remove the yellow Home underline from every catalog portal header. */
+.catalogo-eaduems-portalheader .eaduems-portal-navhome::after,
+.local-catalogo-eaduems .eaduems-portal-navhome::after,
+.eaduems-portal-navhome::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Soft native Moodle controls in the catalog Index header. */
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner {
+    max-width: none;
+    padding-left: clamp(1rem, 16vw, 19rem);
+    padding-right: clamp(1rem, 3vw, 3rem);
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav {
+    align-items: center;
+    background: rgba(255, 255, 255, .82);
+    border: 1px solid rgba(6, 70, 37, .12);
+    box-shadow: 0 8px 18px rgba(6, 70, 37, .08);
+    color: #064625;
+    display: flex !important;
+    gap: .4rem;
+    justify-content: flex-end;
+    margin-left: auto;
+    min-height: 3rem;
+    padding: .28rem .35rem;
+    position: static !important;
+    transform: none !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .popover-region,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .usermenu-container,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .usermenu,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .editmode-switch-form {
+    align-items: center;
+    display: flex !important;
+    margin: 0;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .popover-region-toggle,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .dropdown-toggle,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .btn,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .editmode-switch-form label {
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(6, 70, 37, .1);
+    border-radius: 0 !important;
+    box-shadow: none;
+    color: #064625 !important;
+    display: inline-flex;
+    min-height: 2.25rem;
+    padding: .28rem .5rem;
+    transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .popover-region-toggle:hover,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .popover-region-toggle:focus,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .dropdown-toggle:hover,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .dropdown-toggle:focus,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .btn:hover,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .btn:focus,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .editmode-switch-form label:hover {
+    background: rgba(214, 223, 42, .12);
+    border-color: rgba(6, 70, 37, .22);
+    box-shadow: 0 0 0 .12rem rgba(214, 223, 42, .14);
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .popover-region-toggle .icon,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .dropdown-toggle .icon,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .btn .icon {
+    color: #064625 !important;
+    margin: 0;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .usertext,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .avatars {
+    color: #064625 !important;
+    font-weight: 700;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .userinitials {
+    background: #064625 !important;
+    color: #fff !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .count-container {
+    background: #d6df2a;
+    box-shadow: 0 0 0 2px #fff;
+    color: #064625;
+    font-weight: 800;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .dropdown-menu,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav .popover-region-container {
+    border-radius: 0 !important;
+    box-shadow: 0 14px 32px rgba(6, 70, 37, .18);
+}
+
+@media (max-width: 991.98px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-usernav {
+        align-self: stretch;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-left: 0;
+    }
+}
+
+/* Final shared form-control treatment for native Moodle controls in catalog headers. */
+.catalogo-eaduems-portalheader .eaduems-portal-usernav {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    display: flex !important;
+    gap: .45rem;
+    justify-content: flex-end;
+    margin-left: auto;
+    min-height: 2.45rem;
+    padding: 0;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .usermenu-container,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .usermenu,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form {
+    align-items: stretch;
+    display: flex !important;
+    margin: 0;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region-toggle,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .btn,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label {
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e1e6e3;
+    border-radius: 0 !important;
+    box-shadow: none;
+    color: #56635c !important;
+    display: inline-flex;
+    font-weight: 600;
+    min-height: 2.45rem;
+    padding: 0 .65rem;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region-toggle {
+    background: #eef2ef;
+    justify-content: center;
+    min-width: 2.55rem;
+    padding: 0;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle {
+    max-width: 9.5rem;
+    min-width: 8.25rem;
+    padding-left: .5rem;
+    padding-right: .65rem;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .usermenu .userbutton {
+    align-items: center;
+    display: inline-flex;
+    gap: .35rem;
+    min-width: 0;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .userbutton::before,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label::before {
+    align-items: center;
+    align-self: stretch;
+    background: #eef2ef;
+    color: #77827b;
+    display: inline-flex;
+    font-family: FontAwesome, "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    justify-content: center;
+    margin: -.01rem .55rem -.01rem -.5rem;
+    min-width: 2.3rem;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .userbutton::before {
+    content: "\f007";
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label::before {
+    content: "\f013";
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .usertext {
+    color: #56635c !important;
+    display: block;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .userinitials,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars img {
+    display: none !important;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label {
+    gap: .45rem;
+    min-width: 10.5rem;
+    padding-right: .65rem;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check-input {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region-toggle:hover,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region-toggle:focus,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle:hover,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle:focus,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .btn:hover,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .btn:focus,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label:hover {
+    background: #fff;
+    border-color: rgba(6, 70, 37, .28);
+    box-shadow: 0 0 0 .12rem rgba(214, 223, 42, .18);
+    transform: none;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region-toggle .icon,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .icon,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .btn .icon {
+    color: #6f7b74 !important;
+    margin: 0;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .count-container {
+    background: #d6df2a;
+    box-shadow: 0 0 0 2px #fff;
+    color: #064625;
+    font-weight: 800;
+}
+
+@media (max-width: 991.98px) {
+    .catalogo-eaduems-portalheader .eaduems-portal-usernav {
+        align-self: stretch;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle {
+        max-width: min(100%, 9.5rem);
+        min-width: 8.25rem;
+    }
+
+    .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label {
+        min-width: min(100%, 10.5rem);
+    }
+}
+
+/* Correction: stronger final sizing and edit switch as one rectangle in catalog headers. */
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle {
+    max-width: 8.75rem !important;
+    min-width: 7.5rem !important;
+    width: 8.75rem !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form {
+    align-items: stretch !important;
+    background: #fff;
+    border: 1px solid #e1e6e3;
+    border-radius: 0 !important;
+    box-shadow: none;
+    display: inline-flex !important;
+    min-height: 2.45rem;
+    min-width: 11.5rem;
+    padding: 0 .65rem 0 0;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form:hover,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form:focus-within,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form:hover,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form:focus-within {
+    border-color: rgba(6, 70, 37, .28);
+    box-shadow: 0 0 0 .12rem rgba(214, 223, 42, .18);
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    flex: 1 1 auto;
+    min-height: 2.35rem;
+    min-width: 0 !important;
+    padding: 0 .5rem 0 0 !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label::before,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form label::before {
+    margin: 0 .55rem 0 0 !important;
+    min-width: 2.35rem;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check-input,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check-input {
+    align-self: center;
+    flex: 0 0 auto;
+    margin: 0 0 0 .45rem !important;
+}
+
+/* Correction 2: compact user menu and auto-width edit switch internals in catalog headers. */
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle {
+    max-width: 4.75rem !important;
+    min-width: 4.75rem !important;
+    width: 4.75rem !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .userbutton,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .userbutton {
+    justify-content: center;
+    width: 100%;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .input-group,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .input-group {
+    align-items: stretch;
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check {
+    align-items: center;
+    display: inline-flex;
+    margin: 0;
+    min-height: 2.35rem;
+    padding-left: 0;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check-label:not(label),
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form .form-check-label:not(label) {
+    display: none;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .editmode-switch-form {
+    min-width: 0;
+    width: auto;
+}
+
+/* Align logged-in catalog Index user tools with the /my/ portal header treatment. */
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .catalogo-eaduems-usernav {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    gap: .45rem !important;
+    min-height: 2.45rem !important;
+    padding: 0 !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .catalogo-eaduems-usernav .popover-region-toggle,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .catalogo-eaduems-usernav .dropdown-toggle,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .catalogo-eaduems-usernav .btn {
+    border-color: #e1e6e3 !important;
+    min-height: 2.45rem !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .catalogo-eaduems-usernav .popover-region-toggle {
+    background: #eef2ef !important;
+    min-width: 2.55rem !important;
+    padding: 0 !important;
+}
+
+/* Keep native Moodle user menus above the catalog portal navbar. */
+.catalogo-eaduems-portalheader.eaduems-portal,
+.catalogo-eaduems-portalheader .eaduems-portal-mainheader,
+.catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .usermenu-container,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .usermenu,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown {
+    overflow: visible !important;
+}
+
+.catalogo-eaduems-portalheader.eaduems-portal,
+.catalogo-eaduems-portalheader .eaduems-portal-mainheader {
+    position: relative;
+    z-index: 40;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-navbar {
+    position: relative;
+    z-index: 10;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-menu,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .popover-region-container {
+    z-index: 1080 !important;
+}
+
+/* Keep catalog pages from gaining horizontal scroll while dropdowns remain vertically visible. */
+body.path-local-catalogo_eaduems {
+    overflow-x: hidden !important;
+}
+
+html:has(body.path-local-catalogo_eaduems) {
+    overflow-x: hidden !important;
+}
+
+/* Use Moodle's native user initials instead of the generic user icon in catalog headers. */
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .userbutton::before {
+    content: none !important;
+    display: none !important;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars,
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .userinitials {
+    align-items: center !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars {
+    margin: 0 !important;
+    min-width: 1.75rem;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars img {
+    display: none !important;
+}
+
+.catalogo-eaduems-portalheader .eaduems-portal-usernav .userinitials {
+    background: #064625 !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+    flex: 0 0 1.75rem;
+    font-size: .72rem !important;
+    font-weight: 800 !important;
+    height: 1.75rem !important;
+    letter-spacing: 0;
+    line-height: 1 !important;
+    width: 1.75rem !important;
+}
+
+/* Strong override: show Moodle user initials in compact catalog user menus. */
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .dropdown-toggle .userbutton::before {
+    content: none !important;
+    display: none !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .avatar,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .userinitials {
+    align-items: center !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars,
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .avatar {
+    height: 1.75rem !important;
+    margin: 0 !important;
+    min-width: 1.75rem !important;
+    width: 1.75rem !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .avatars img {
+    display: none !important;
+}
+
+body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav .userinitials {
+    background: #064625 !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+    flex: 0 0 1.75rem !important;
+    font-size: .72rem !important;
+    font-weight: 800 !important;
+    height: 1.75rem !important;
+    line-height: 1 !important;
+    text-transform: uppercase;
+    width: 1.75rem !important;
+}
+
+/* Desktop header edge alignment shared with the portal home/dashboard. */
+@media (min-width: 992px) {
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-mainheader-inner {
+        max-width: none !important;
+        padding-left: clamp(1rem, 3vw, 3rem) !important;
+        padding-right: clamp(1rem, 3vw, 3rem) !important;
+    }
+
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-headerlogin,
+    body#page-local-catalogo_eaduems-public-index .catalogo-eaduems-portalheader .eaduems-portal-usernav,
+    body#page-local-catalogo_eaduems-public-detalhes .catalogo-eaduems-portalheader .eaduems-portal-usernav {
+        margin-left: auto;
+    }
+}
+
+/* Hierarchical category filter. */
+.catalogo-eaduems-categoryfilter option.catalogo-eaduems-category-parentoption {
+    color: var(--catalogo-eaduems-green-dark);
+    font-weight: 800;
+}
+
+.catalogo-eaduems-categoryfilter option.catalogo-eaduems-category-childoption {
+    color: var(--catalogo-eaduems-ink);
+    font-weight: 500;
+}
+
+.catalogo-eaduems-categoryitem.is-parent .catalogo-eaduems-categoryname {
+    color: var(--catalogo-eaduems-green-dark);
+    font-weight: 800;
+}
+
+.catalogo-eaduems-categoryitem.catalogo-eaduems-categorydepth-1 a {
+    padding-left: 1rem;
+}
+
+.catalogo-eaduems-categoryitem.catalogo-eaduems-categorydepth-2 a,
+.catalogo-eaduems-categoryitem.catalogo-eaduems-categorydepth-3 a {
+    padding-left: 1.75rem;
+}
+
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter {
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--catalogo-eaduems-border);
+    border-radius: 0;
+    color: var(--catalogo-eaduems-green-dark);
+    display: inline-flex;
+    font-weight: 800;
+    justify-content: center;
+    min-height: 2.5rem;
+    min-width: 7rem;
+    padding: .5rem 1rem;
+    text-decoration: none;
+}
+
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter:hover,
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter:focus {
+    background: rgba(214, 223, 42, .12);
+    border-color: rgba(6, 70, 37, .28);
+    box-shadow: 0 0 0 .12rem rgba(214, 223, 42, .18);
+    color: var(--catalogo-eaduems-green-dark);
+    text-decoration: none;
+}
+
+/* Refinement: keep clear filter visible and compact beside Filter. */
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter {
+    font-size: .86rem;
+    min-width: 5.5rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+/* Refinement 2: keep category actions in one row on desktop. */
+.catalogo-eaduems-categoryfilter {
+    grid-template-columns: minmax(220px, 320px) auto auto;
+}
+
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter {
+    justify-self: start;
+    width: auto;
+}
+
+@media (max-width: 575.98px) {
+    .catalogo-eaduems-categoryfilter {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .catalogo-eaduems-categoryfilter select {
+        grid-column: 1 / -1;
+    }
+
+    .catalogo-eaduems-categoryfilter button,
+    .catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+/* Refinement 3: equal filter action buttons with leading icons. */
+.catalogo-eaduems-categoryfilter button,
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter {
+    align-items: center;
+    display: inline-flex;
+    gap: .45rem;
+    justify-content: center;
+    min-height: 2.5rem;
+    min-width: 8rem;
+    padding: .5rem 1rem;
+    width: 8rem;
+}
+
+.catalogo-eaduems-categoryfilter .catalogo-eaduems-actionicon {
+    align-items: center;
+    display: inline-flex;
+    font-family: FontAwesome, "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif;
+    font-size: .82rem;
+    font-weight: 900;
+    justify-content: center;
+    line-height: 1;
+    min-width: 1rem;
+}
+
+@media (max-width: 575.98px) {
+    .catalogo-eaduems-categoryfilter button,
+    .catalogo-eaduems-categoryfilter .catalogo-eaduems-clearfilter {
+        width: 100%;
+    }
+}
+
+
+/* Match catalog portal menu labels to the native home navbar. */
+@media (min-width: 768px) {
+    .catalogo-eaduems-portalheader .eaduems-portal-navbar-inner {
+        min-height: 4rem !important;
+    }
+
+    .catalogo-eaduems-portalheader .eaduems-portal-navbar a {
+        font-weight: 500 !important;
+        min-height: 4rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .catalogo-eaduems-portalheader .eaduems-portal-navhome {
+        background: rgba(214, 223, 42, .1) !important;
+    }
+}
+/* Details page refinement: softer course title and WhatsApp action aligned to primary buttons. */
+.local-catalogo-eaduems .catalogo-eaduems-details-main h2 {
+    background: linear-gradient(90deg, rgba(15, 107, 58, .12), rgba(214, 223, 42, .16));
+    border-left: 4px solid var(--catalogo-eaduems-green);
+    color: var(--catalogo-eaduems-green-dark);
+    display: block;
+    font-size: clamp(1.55rem, 2.6vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.25;
+    padding: .55rem .8rem;
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-share {
+    align-items: center;
+    background: var(--catalogo-eaduems-green);
+    border: 1px solid var(--catalogo-eaduems-green);
+    color: #fff;
+    display: inline-flex;
+    font-weight: 700;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: .5rem .875rem;
+    text-decoration: none;
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-share::before {
+    content: "\f232";
+    font-family: FontAwesome, "Font Awesome 6 Brands", "Font Awesome 5 Brands", "Font Awesome 6 Free", sans-serif;
+    font-weight: 400;
+    margin-right: .45rem;
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-share:hover,
+.local-catalogo-eaduems .catalogo-eaduems-share:focus {
+    background: var(--catalogo-eaduems-green-dark);
+    border-color: var(--catalogo-eaduems-green-dark);
+    color: #fff;
+    text-decoration: none;
+}
+/* Details action card refinement: softer heading and secondary WhatsApp action. */
+.local-catalogo-eaduems .catalogo-eaduems-actioncard h2 {
+    align-items: center;
+    background: rgba(15, 107, 58, .08);
+    border: 1px solid rgba(15, 107, 58, .16);
+    color: var(--catalogo-eaduems-green-dark);
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 0;
+    min-height: 2.35rem;
+    padding: .45rem .65rem;
+    text-align: center;
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-share {
+    background: #198754;
+    border-color: #198754;
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-share:hover,
+.local-catalogo-eaduems .catalogo-eaduems-share:focus {
+    background: #146c43;
+    border-color: #146c43;
+}
+/* Visitor action card refinement: center helper text and strengthen secondary action. */
+.local-catalogo-eaduems .catalogo-eaduems-actioncard p {
+    color: var(--catalogo-eaduems-muted);
+    font-size: .95rem;
+    line-height: 1.45;
+    margin: 0 auto;
+    max-width: 17rem;
+    text-align: center;
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-actioncard .catalogo-eaduems-button-secondary {
+    background: rgba(15, 107, 58, .06);
+    border-color: rgba(15, 107, 58, .55);
+    color: var(--catalogo-eaduems-green-dark);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .75);
+}
+
+.local-catalogo-eaduems .catalogo-eaduems-actioncard .catalogo-eaduems-button-secondary:hover,
+.local-catalogo-eaduems .catalogo-eaduems-actioncard .catalogo-eaduems-button-secondary:focus {
+    background: var(--catalogo-eaduems-green-dark);
+    border-color: var(--catalogo-eaduems-green-dark);
+    color: #fff;
 }

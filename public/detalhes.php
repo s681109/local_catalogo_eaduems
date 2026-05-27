@@ -14,7 +14,7 @@ $PAGE->set_url(new moodle_url('/local/catalogo_eaduems/public/detalhes.php', ['i
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title($course->fullname);
 $PAGE->set_heading($course->fullname);
-$PAGE->requires->css(new moodle_url('/local/catalogo_eaduems/styles.css'));
+$PAGE->requires->css(new moodle_url('/local/catalogo_eaduems/styles.css', ['v' => filemtime(__DIR__ . '/../styles.css') ?: time()]));
 
 echo $OUTPUT->header();
 

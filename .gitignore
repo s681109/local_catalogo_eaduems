@@ -5,3 +5,4 @@ Thumbs.db
 *.zip
 vendor/
 node_modules/
+docs/visual_checks/

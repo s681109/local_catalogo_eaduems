@@ -357,3 +357,39 @@ Ponto de retomada: após a validação da Index e a decisão de tratar o login i
 ## 13. Decisões em aberto
 
 - Nenhuma decisão funcional aberta neste momento.
+
+## Fechamento de release - 2026-05-27
+
+Decisão:
+
+- O plugin `local_catalogo_eaduems` foi considerado candidato a entrega funcional.
+- Serão gerados dois artefatos de distribuição:
+  - `0.3.0-beta` com `MATURITY_BETA`, para validação intermediária.
+  - `1.0.0` com `MATURITY_STABLE`, como entrega inicial estável.
+- A versão mantida no repositório principal passa a ser `1.0.0 / MATURITY_STABLE`.
+
+Checklist de release:
+
+- [x] Ajustar metadados de versão no `version.php`.
+- [ ] Gerar pacote beta.
+- [ ] Gerar pacote stable.
+- [ ] Validar instalação no `moodle-teste.local`.
+- [ ] Criar commit/tag e enviar ao GitHub.
+## Validação em instância de teste - 2026-05-27
+
+Instância alvo:
+
+- `http://moodle-teste.local`
+- Código instalado em `D:\wamp64\www\moodle_teste\public\local\catalogo_eaduems`.
+
+Resultado:
+
+- Upgrade CLI executado com sucesso na instância de teste.
+- Cache da instância de teste limpo.
+- Index do catálogo respondeu `200 OK` em `/local/catalogo_eaduems/public/index.php`.
+- Título retornado: `Catálogo de Cursos EAD/UEMS | MDL_Teste_51`.
+- Página de detalhes não foi validada nessa instância porque a Index não retornou links `detalhes.php?id=...`, indicando ausência de cursos visíveis/publicados para o catálogo no ambiente de teste.
+
+Pendente opcional:
+
+- Criar/publicar um curso de teste visível em `moodle-teste.local` e revalidar a página Detalhes antes de homologação final em ambiente externo.

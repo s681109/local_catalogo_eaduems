@@ -14,6 +14,7 @@ $string['catalogresults_kicker'] = 'Catalog';
 $string['catalogresults'] = 'Catalog results';
 $string['authenticatedactions_desc'] = 'Open the course area in Moodle.';
 $string['category'] = 'Category';
+$string['clearfilter'] = 'Clear';
 $string['certificate'] = 'Certificate';
 $string['continuecourse'] = 'Continue course';
 $string['courseabout'] = 'About this course';
