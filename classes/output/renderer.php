@@ -77,7 +77,11 @@ class renderer extends plugin_renderer_base {
         int $perpage,
         moodle_url $url
     ): string {
-        global $OUTPUT;
+        global $OUTPUT, $USER;
+
+        $favoriteids = isloggedin() && !isguestuser()
+            ? \local_catalogo_eaduems\local\favorite_service::get_course_ids($USER->id)
+            : [];
 
         $output = $this->render_catalog_navigation();
         $output .= html_writer::start_div('catalogo-eaduems-layout');
@@ -88,7 +92,7 @@ class renderer extends plugin_renderer_base {
         if (!empty($courses)) {
             $output .= html_writer::start_div('catalogo-eaduems-cards');
             foreach ($courses as $course) {
-                $output .= $this->render_course_card($course);
+                $output .= $this->render_course_card($course, in_array((int) $course->id, $favoriteids, true), $url);
             }
             $output .= html_writer::end_div();
             $output .= $OUTPUT->paging_bar($total, $page, $perpage, $url);
@@ -105,7 +109,7 @@ class renderer extends plugin_renderer_base {
         return $output;
     }
 
-    public function render_course_card(\stdClass $course): string {
+    public function render_course_card(\stdClass $course, bool $isfavorite = false, ?moodle_url $returnurl = null): string {
         $summary = shorten_text(trim(html_to_text((string) $course->summary, 0, false)), 170);
         $detailsurl = new moodle_url('/local/catalogo_eaduems/public/detalhes.php', ['id' => $course->id]);
         $categoryname = $course->categoryname ?? '';
@@ -124,6 +128,7 @@ class renderer extends plugin_renderer_base {
         $output .= html_writer::link($detailsurl, get_string('viewdetails', 'local_catalogo_eaduems'), [
             'class' => 'catalogo-eaduems-button',
         ]);
+        $output .= $this->render_favorite_toggle($course->id, $isfavorite, $returnurl);
         $output .= html_writer::end_div();
         $output .= html_writer::end_div();
         $output .= html_writer::end_tag('article');
@@ -163,6 +168,7 @@ class renderer extends plugin_renderer_base {
         }
         $output .= html_writer::tag('h2', s($course->fullname));
         $output .= $this->render_course_highlights($course, $metadata);
+        $output .= $this->render_favorite_toggle($course->id, $this->course_is_favorite($course->id), new moodle_url('/local/catalogo_eaduems/public/detalhes.php', ['id' => $course->id]));
         $output .= html_writer::tag('h3', s(get_string('courseabout', 'local_catalogo_eaduems')), ['class' => 'catalogo-eaduems-sectiontitle']);
         $output .= $this->render_course_summary($course);
         $output .= html_writer::tag('h3', s(get_string('coursecontent', 'local_catalogo_eaduems')), ['class' => 'catalogo-eaduems-sectiontitle']);
@@ -206,9 +212,12 @@ class renderer extends plugin_renderer_base {
         return $output;
     }
 
-    private function render_catalog_navigation(?\stdClass $course = null): string {
+    private function render_catalog_navigation(?\stdClass $course = null, bool $isfavoritespage = false): string {
+        global $USER;
+
         $homeurl = new moodle_url('/');
         $catalogurl = new moodle_url('/local/catalogo_eaduems/public/index.php');
+        $favoritesurl = new moodle_url('/local/catalogo_eaduems/public/favoritos.php');
         $homecontent = html_writer::span('&#xf015;', 'catalogo-eaduems-homeicon', ['aria-hidden' => 'true']);
         $homecontent .= html_writer::span(s(get_string('homepage', 'local_catalogo_eaduems')));
 
@@ -231,7 +240,70 @@ class renderer extends plugin_renderer_base {
             ]);
         }
 
+        if (isloggedin() && !isguestuser()) {
+            $output .= html_writer::span('›', 'catalogo-eaduems-breadcrumbseparator', ['aria-hidden' => 'true']);
+            if ($isfavoritespage) {
+                $output .= html_writer::tag('span', s(get_string('favorites', 'local_catalogo_eaduems')), [
+                    'aria-current' => 'page',
+                ]);
+            } else {
+                $output .= html_writer::link($favoritesurl, get_string('favorites', 'local_catalogo_eaduems'));
+            }
+        }
+
         $output .= html_writer::end_tag('nav');
+
+        return $output;
+    }
+
+    public function render_favorites_page(array $courses): string {
+        $output = $this->render_catalog_navigation(null, true);
+        $output .= html_writer::start_div('catalogo-eaduems-favoritespage');
+        $output .= html_writer::tag('h2', s(get_string('favorites', 'local_catalogo_eaduems')));
+        $output .= html_writer::tag('p', s(get_string('favoritesdesc', 'local_catalogo_eaduems')));
+        if (empty($courses)) {
+            $output .= html_writer::div(get_string('favoritesempty', 'local_catalogo_eaduems'), 'catalogo-eaduems-empty');
+        } else {
+            $output .= html_writer::start_div('catalogo-eaduems-cards');
+            foreach ($courses as $course) {
+                $output .= $this->render_course_card($course, true, new moodle_url('/local/catalogo_eaduems/public/favoritos.php'));
+            }
+            $output .= html_writer::end_div();
+        }
+        $output .= html_writer::end_div();
+
+        return $output;
+    }
+
+    private function course_is_favorite(int $courseid): bool {
+        global $USER;
+
+        return isloggedin() && !isguestuser()
+            && \local_catalogo_eaduems\local\favorite_service::is_favorite($USER->id, $courseid);
+    }
+
+    private function render_favorite_toggle(int $courseid, bool $isfavorite, ?moodle_url $returnurl = null): string {
+        if (!isloggedin() || isguestuser()) {
+            return '';
+        }
+
+        $actionurl = new moodle_url('/local/catalogo_eaduems/public/favorito.php');
+        $returnurl = $returnurl ?? new moodle_url('/local/catalogo_eaduems/public/index.php');
+        $label = $isfavorite
+            ? get_string('removefavorite', 'local_catalogo_eaduems')
+            : get_string('savefavorite', 'local_catalogo_eaduems');
+        $classes = 'catalogo-eaduems-favoritebutton' . ($isfavorite ? ' is-favorite' : '');
+
+        $output = html_writer::start_tag('form', [
+            'action' => $actionurl->out(false),
+            'class' => 'catalogo-eaduems-favoriteform',
+            'method' => 'post',
+        ]);
+        $output .= html_writer::empty_tag('input', ['name' => 'courseid', 'type' => 'hidden', 'value' => $courseid]);
+        $output .= html_writer::empty_tag('input', ['name' => 'returnurl', 'type' => 'hidden', 'value' => $returnurl->out(false)]);
+        $output .= html_writer::empty_tag('input', ['name' => 'sesskey', 'type' => 'hidden', 'value' => sesskey()]);
+        $output .= html_writer::tag('button', s($label), ['class' => $classes, 'type' => 'submit']);
+        $output .= html_writer::end_tag('form');
 
         return $output;
     }

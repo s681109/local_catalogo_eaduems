@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/catalogo_eaduems/db" VERSION="2026081500" COMMENT="XMLDB file for local_catalogo_eaduems">
+  <TABLES>
+    <TABLE NAME="local_catalogo_eaduems_fav" COMMENT="Personal saved courses in the public catalog">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="usercourse_uix" UNIQUE="true" FIELDS="userid, courseid" />
+        <INDEX NAME="course_ix" UNIQUE="false" FIELDS="courseid" />
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

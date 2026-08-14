@@ -47,6 +47,27 @@ class course_repository {
         ];
     }
 
+    public function get_visible_courses_by_ids(array $courseids): array {
+        global $DB;
+
+        if (empty($courseids)) {
+            return [];
+        }
+
+        [$insql, $params] = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED, 'favoritecourse');
+        return $DB->get_records_sql(
+            "SELECT c.*, cc.name AS categoryname
+               FROM {course} c
+               JOIN {course_categories} cc ON cc.id = c.category
+              WHERE c.id {$insql}
+                AND c.id > 1
+                AND c.visible = 1
+                AND cc.visible = 1
+           ORDER BY c.fullname ASC",
+            $params
+        );
+    }
+
     public function get_visible_categories(): array {
         global $DB;
 

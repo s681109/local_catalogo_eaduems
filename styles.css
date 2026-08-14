@@ -411,6 +411,49 @@
     min-width: 9rem;
 }
 
+.catalogo-eaduems-cardfooter {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+}
+
+.catalogo-eaduems-favoriteform {
+    margin: 0;
+}
+
+.catalogo-eaduems-favoritebutton {
+    background: transparent;
+    border: 1px solid var(--catalogo-eaduems-green);
+    color: var(--catalogo-eaduems-green-dark);
+    font-weight: 700;
+    min-height: 2.5rem;
+    padding: .45rem .75rem;
+}
+
+.catalogo-eaduems-favoritebutton:hover,
+.catalogo-eaduems-favoritebutton:focus-visible,
+.catalogo-eaduems-favoritebutton.is-favorite {
+    background: rgba(214, 223, 42, .2);
+    border-color: var(--catalogo-eaduems-green-dark);
+    color: var(--catalogo-eaduems-green-dark);
+}
+
+.catalogo-eaduems-favoritebutton:focus-visible {
+    outline: 3px solid var(--catalogo-token-focus-ring);
+    outline-offset: 2px;
+}
+
+.catalogo-eaduems-favoritespage > h2 {
+    color: var(--catalogo-eaduems-green-dark);
+    margin: 0 0 .35rem;
+}
+
+.catalogo-eaduems-favoritespage > p {
+    color: var(--catalogo-eaduems-muted);
+    margin-bottom: 1.25rem;
+}
+
 .catalogo-eaduems-cardbody {
     display: flex;
     flex-direction: column;
