@@ -5,17 +5,21 @@ use local_catalogo_eaduems\local\config;
 use local_catalogo_eaduems\local\course_repository;
 
 $categoryid = optional_param('category', 0, PARAM_INT);
+$search = trim(optional_param('search', '', PARAM_TEXT));
 $page = optional_param('page', 0, PARAM_INT);
 
 $repository = new course_repository();
 
-$url = new moodle_url('/local/catalogo_eaduems/public/index.php', [
-    'category' => $categoryid,
-]);
+$urlparams = ['category' => $categoryid];
+if ($search !== '') {
+    $urlparams['search'] = $search;
+}
+$url = new moodle_url('/local/catalogo_eaduems/public/index.php', $urlparams);
 
 $perpage = config::courses_per_page();
 $filters = [
     'category' => $categoryid,
+    'search' => $search,
     'sort' => 'name',
 ];
 $catalog = $repository->get_catalog($filters, $page, $perpage);
