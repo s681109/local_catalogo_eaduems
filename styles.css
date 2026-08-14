@@ -2417,6 +2417,59 @@ body[data-bs-theme="dark"]#page-local-catalogo_eaduems-public-detalhes #region-m
     }
 }
 
+/* Contextual navigation for the public catalog and course details pages. */
+.catalogo-eaduems-breadcrumbs {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0 0 1.25rem;
+    min-width: 0;
+}
+
+.catalogo-eaduems-breadcrumbs a,
+.catalogo-eaduems-breadcrumbs [aria-current="page"] {
+    color: var(--catalogo-eaduems-green-dark);
+    font-size: .9rem;
+    overflow-wrap: anywhere;
+}
+
+.catalogo-eaduems-homebutton {
+    align-items: center;
+    background: var(--catalogo-token-control-surface);
+    border: 1px solid var(--catalogo-token-control-border);
+    color: var(--catalogo-eaduems-green-dark);
+    display: inline-flex;
+    font-weight: 700;
+    gap: .45rem;
+    min-height: 2.35rem;
+    padding: .4rem .7rem;
+    text-decoration: none;
+}
+
+.catalogo-eaduems-homebutton:hover,
+.catalogo-eaduems-homebutton:focus-visible {
+    background: var(--catalogo-eaduems-green-dark);
+    border-color: var(--catalogo-eaduems-green-dark);
+    color: #fff;
+    text-decoration: none;
+}
+
+.catalogo-eaduems-homebutton:focus-visible {
+    outline: 3px solid var(--catalogo-token-focus-ring);
+    outline-offset: 2px;
+}
+
+.catalogo-eaduems-homeicon {
+    font-family: FontAwesome, "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+}
+
+.catalogo-eaduems-breadcrumbseparator {
+    color: var(--catalogo-eaduems-muted);
+    font-size: 1.1rem;
+}
+
 :is(html[data-bs-theme="dark"], body[data-bs-theme="dark"]) .local-catalogo-eaduems {
     --catalogo-token-filter-select-surface: var(--catalogo-token-control-surface);
     --catalogo-token-filter-select-text: var(--catalogo-token-text-on-brand);

@@ -79,7 +79,8 @@ class renderer extends plugin_renderer_base {
     ): string {
         global $OUTPUT;
 
-        $output = html_writer::start_div('catalogo-eaduems-layout');
+        $output = $this->render_catalog_navigation();
+        $output .= html_writer::start_div('catalogo-eaduems-layout');
         $output .= html_writer::start_tag('section', ['class' => 'catalogo-eaduems-results', 'aria-label' => get_string('catalogresults', 'local_catalogo_eaduems')]);
         $output .= $this->render_results_header($total, $filters);
         $output .= $this->render_category_filter($filters, $categories);
@@ -153,7 +154,8 @@ class renderer extends plugin_renderer_base {
         global $USER;
 
         $categoryname = $course->categoryname ?? '';
-        $output = html_writer::start_div('catalogo-eaduems-details-layout');
+        $output = $this->render_catalog_navigation($course);
+        $output .= html_writer::start_div('catalogo-eaduems-details-layout');
         $output .= html_writer::start_tag('article', ['class' => 'catalogo-eaduems-details-main']);
         $output .= $this->render_course_media($course, 'catalogo-eaduems-details-media');
         if ($categoryname !== '') {
@@ -200,6 +202,36 @@ class renderer extends plugin_renderer_base {
 
         $output .= html_writer::end_tag('aside');
         $output .= html_writer::end_div();
+
+        return $output;
+    }
+
+    private function render_catalog_navigation(?\stdClass $course = null): string {
+        $homeurl = new moodle_url('/');
+        $catalogurl = new moodle_url('/local/catalogo_eaduems/public/index.php');
+        $homecontent = html_writer::span('&#xf015;', 'catalogo-eaduems-homeicon', ['aria-hidden' => 'true']);
+        $homecontent .= html_writer::span(s(get_string('homepage', 'local_catalogo_eaduems')));
+
+        $output = html_writer::start_tag('nav', [
+            'class' => 'catalogo-eaduems-breadcrumbs',
+            'aria-label' => get_string('breadcrumblabel', 'local_catalogo_eaduems'),
+        ]);
+        $output .= html_writer::link($homeurl, $homecontent, ['class' => 'catalogo-eaduems-homebutton']);
+        $output .= html_writer::span('›', 'catalogo-eaduems-breadcrumbseparator', ['aria-hidden' => 'true']);
+
+        if ($course === null) {
+            $output .= html_writer::tag('span', s(get_string('nav_catalog', 'local_catalogo_eaduems')), [
+                'aria-current' => 'page',
+            ]);
+        } else {
+            $output .= html_writer::link($catalogurl, get_string('nav_catalog', 'local_catalogo_eaduems'));
+            $output .= html_writer::span('›', 'catalogo-eaduems-breadcrumbseparator', ['aria-hidden' => 'true']);
+            $output .= html_writer::tag('span', s($course->fullname), [
+                'aria-current' => 'page',
+            ]);
+        }
+
+        $output .= html_writer::end_tag('nav');
 
         return $output;
     }

@@ -79,3 +79,5 @@ $string['clearfilters'] = 'Clear filters';
 $string['coursehighlights'] = 'Key information';
 $string['emptyfiltereddesc'] = 'Try another term or clear the filters to see all available courses.';
 $string['emptyfilteredtitle'] = 'No courses found with these filters';
+$string['breadcrumblabel'] = 'Breadcrumb navigation';
+$string['homepage'] = 'Home page';

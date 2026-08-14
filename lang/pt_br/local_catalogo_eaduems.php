@@ -79,3 +79,5 @@ $string['clearfilters'] = 'Limpar filtros';
 $string['coursehighlights'] = 'Informações principais';
 $string['emptyfiltereddesc'] = 'Tente outro termo ou remova os filtros para ver todas as ofertas disponíveis.';
 $string['emptyfilteredtitle'] = 'Nenhum curso encontrado com estes filtros';
+$string['breadcrumblabel'] = 'Navegação estrutural';
+$string['homepage'] = 'Página inicial';
