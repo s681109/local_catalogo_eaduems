@@ -1,6 +1,7 @@
 <?php
 $string['pluginname'] = 'EAD/UEMS Course Catalog';
 $string['accesscourse'] = 'Access course';
+$string['activefilter'] = 'Active filter:';
 $string['action_kicker'] = 'Access';
 $string['alreadyhaveaccount'] = 'I already have an account';
 $string['allcategories'] = 'All categories';

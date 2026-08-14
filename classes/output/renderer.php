@@ -204,6 +204,7 @@ class renderer extends plugin_renderer_base {
     }
 
     private function render_category_filter(array $filters, array $categories): string {
+        $currentcategory = (int) ($filters['category'] ?? 0);
         $output = html_writer::start_tag('form', [
             'action' => 'index.php',
             'method' => 'get',
@@ -237,6 +238,21 @@ class renderer extends plugin_renderer_base {
             'class' => 'catalogo-eaduems-clearfilter',
         ]);
         $output .= html_writer::end_tag('form');
+
+        if ($currentcategory > 0) {
+            foreach ($categories as $category) {
+                if ((int) $category->id !== $currentcategory) {
+                    continue;
+                }
+
+                $activecontent = html_writer::span(s(get_string('activefilter', 'local_catalogo_eaduems')), 'catalogo-eaduems-activefilter-label');
+                $activecontent .= html_writer::span(s($category->name), 'catalogo-eaduems-activefilter-name');
+                $output .= html_writer::div($activecontent, 'catalogo-eaduems-activefilter', [
+                    'role' => 'status',
+                ]);
+                break;
+            }
+        }
 
         return $output;
     }
@@ -305,7 +321,7 @@ class renderer extends plugin_renderer_base {
             $depth = $this->category_visual_depth($category);
             $prefix = $depth > 0 ? str_repeat('-- ', $depth) : '';
             $options[$category->id] = [
-                'label' => $prefix . $category->name,
+                'label' => $prefix . $category->name . ' (' . (int) ($category->visiblecoursecount ?? 0) . ')',
                 'isparent' => !empty($category->haschildren),
                 'depth' => $depth,
             ];

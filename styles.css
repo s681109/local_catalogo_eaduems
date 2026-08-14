@@ -388,6 +388,22 @@
 }
 
 .catalogo-eaduems-cardbody {
+    min-height: 180px;
+}
+
+.catalogo-eaduems-cardsummary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+}
+
+.catalogo-eaduems-cardfooter .catalogo-eaduems-button {
+    min-width: 9rem;
+}
+
+.catalogo-eaduems-cardbody {
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -2386,4 +2402,25 @@ body[data-bs-theme="dark"]#page-local-catalogo_eaduems-public-detalhes #region-m
     --catalogo-token-filter-option-text: var(--catalogo-token-text-on-brand);
     --catalogo-token-filter-action-text: var(--catalogo-token-text-on-brand);
     --catalogo-token-clearfilter-text: var(--catalogo-token-text-on-brand);
+}
+
+.catalogo-eaduems-activefilter {
+    align-items: center;
+    background: rgba(214, 223, 42, .16);
+    border-left: 3px solid var(--catalogo-eaduems-lime);
+    color: var(--catalogo-eaduems-green-dark);
+    display: flex;
+    gap: .45rem;
+    margin: 0 0 1rem;
+    padding: .55rem .75rem;
+}
+
+.catalogo-eaduems-activefilter-label {
+    font-size: .78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.catalogo-eaduems-activefilter-name {
+    font-weight: 700;
 }
